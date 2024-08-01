@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => {
     const [profilePhoto, setProfilePhoto] = useState<string>("");
 
     const fetchQuestions = async () => {
-        const apiUrl = "http://localhost:8080/questions/getquestions";
+        const apiUrl = "/api/questions/getquestions";
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {
@@ -30,7 +30,7 @@ const LandingPage: React.FC = () => {
     }
 
     const fetchAnswers = async () => {
-        const apiUrl = "http://localhost:8080/questions/getanswers";
+        const apiUrl = "/api/questions/getanswers";
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {
@@ -47,7 +47,7 @@ const LandingPage: React.FC = () => {
     }
 
     const fetchProfilePhoto = async () => {
-        const apiUrl = `http://localhost:8080/profile/defaultphoto`;
+        const apiUrl = `/api/profile/defaultphoto`;
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {

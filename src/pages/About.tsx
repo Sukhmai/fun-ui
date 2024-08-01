@@ -17,7 +17,7 @@ const AboutPage: React.FC<AboutPageProps> = ({text, nextPath}) => {
         const username = tokenCreated[1];
         const isNewToken = tokenCreated[2];
         if (isNewToken) {
-            const apiUrl = `http://localhost:8080/profile/saveuser`;
+            const apiUrl = `/api/profile/saveuser`;
 
             fetch(apiUrl, {
                 method: "POST",

@@ -34,7 +34,7 @@ const QuestionPage: React.FC = () => {
     };
 
     const fetchQuestions = async () => {
-        const apiUrl = "http://localhost:8080/questions/getquestions";
+        const apiUrl = "/api/questions/getquestions";
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {
@@ -58,7 +58,7 @@ const QuestionPage: React.FC = () => {
 
     const handleSubmit = async () => {
         // Replace with your API endpoint
-        const apiUrl = `http://localhost:8080/questions/saveanswer/${questionIndex}`;
+        const apiUrl = `/api/questions/saveanswer/${questionIndex}`;
 
         fetch(apiUrl, {
             method: "POST",
@@ -90,7 +90,7 @@ const QuestionPage: React.FC = () => {
 
     async function fetchProfilePhoto(token: string): Promise<string> {
         try {
-            const apiUrl = "http://localhost:8080/profile/getphoto";
+            const apiUrl = "/api/profile/getphoto";
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
