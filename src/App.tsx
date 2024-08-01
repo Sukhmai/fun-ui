@@ -1,38 +1,61 @@
-import * as React from "react"
+import React from "react";
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
 } from "@chakra-ui/react"
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import PageWrapper from "./components/PageWrapper";
+import AboutPage from "./pages/About";
+import QuestionPage from "./pages/Question";
+import LandingPage from "./pages/Landing";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+export const App: React.FC = () => {
+  return (
+    <ChakraProvider>
+      <ColorModeSwitcher />
+      <Router>
+        <AnimatedRoutes />
+      </Router>
+    </ChakraProvider>
+  );
+};
+
+
+const AnimatedRoutes: React.FC = () => {
+  const location = useLocation();
+
+  return (
+    <Routes location={location} key={location.pathname}>
+      <Route path="/questions" element={<PageWrapper key="home">
+        <QuestionPage />
+      </PageWrapper>}>
+      </Route>
+      <Route path="/" 
+      element=
+      {<PageWrapper key="about">
+        <AboutPage
+        nextPath="/experiment"
+        text=
+        {`This website runs experiments centered on human communication, connection and vulnerability. 
+          Every two weeks, the experiment changes.`} 
+        />
+      </PageWrapper>}>
+    </Route>
+      <Route path="/experiment" 
+      element=
+      {<PageWrapper key="experiment">
+        <AboutPage
+        nextPath="/questions"
+        text=
+        {`This time, you will answer 6 questions that ask you to be increasingly vulnerable.
+          Once completed, you may view others' answers and reply.`} 
+        />
+      </PageWrapper>}>
+      </Route>
+      <Route path="/landing" element={<PageWrapper key="landing">
+        <LandingPage />
+      </PageWrapper>}>
+      </Route>
+    </Routes>
+  );
+};
